@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeNeat — ระบบ Admin จัดการ Feedback (Mockup v2 · QP-DCC-06)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/tabler-icons.min.css">
+<style>
+  :root{--cyan:#31c1d7;--cyanD:#1c7d8c;--sky:#82c9d9;--taupe:#a69586;--orange:#f2ac57;--orangeD:#b9741f;--gold:#dfae69;--mint:#b0d9d1;--ink:#1a1a1a;--muted:#6b7280;--bg:#eef3f5;--card:#fff;--bd:#e1e9ec;--cyanL:#e8f7fa;--orangeL:#fef3e2;--mintL:#e6f4f2;--goldL:#fdf6e8;--grey:#f2f4f5;--red:#b3261e;--redL:#fdeceb;--green:#2f7a4a;--greenL:#e8f0ea;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Tahoma','Sarabun','Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+  .app{display:flex;min-height:100vh}
+  .sb{width:230px;background:#fff;border-right:1px solid var(--bd);display:flex;flex-direction:column;padding:16px 0;position:sticky;top:0;height:100vh}
+  .brand{display:flex;align-items:center;gap:10px;padding:4px 18px 16px;border-bottom:1px solid var(--bd)}
+  .brand .logo{width:34px;height:34px;border-radius:9px;background:var(--cyan);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .brand b{color:var(--cyanD);font-size:15px}.brand small{display:block;color:var(--muted);font-size:11px}
+  .nav{padding:12px 10px;flex:1}
+  .nav a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;color:#44524f;text-decoration:none;font-size:14px;cursor:pointer;margin-bottom:2px}
+  .nav a:hover{background:var(--grey)}
+  .nav a.on{background:var(--cyanL);color:var(--cyanD);font-weight:700}
+  .nav a i{font-size:19px}
+  .me{margin:0 12px;padding:10px 12px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:10px}
+  .me .av{width:32px;height:32px;border-radius:50%;background:var(--sky);color:#0d5563;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+  .main{flex:1;min-width:0}
+  .top{background:#fff;border-bottom:1px solid var(--bd);padding:14px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:5}
+  .top h1{font-size:18px;margin:0;flex:1}
+  .search{display:flex;align-items:center;gap:8px;background:var(--grey);border:1px solid var(--bd);border-radius:9px;padding:7px 12px;width:250px;color:var(--muted)}
+  .search input{border:0;background:transparent;outline:0;flex:1;font-family:inherit;font-size:13px;color:var(--ink)}
+  .wrap{padding:22px 24px;max-width:1200px}
+  .view{display:none}.view.on{display:block}
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:11px;margin-bottom:20px}
+  .kpi{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:13px 14px;border-bottom:3px solid var(--gold)}
+  .kpi .n{font-size:24px;font-weight:700;color:var(--cyanD)}
+  .kpi .l{color:var(--muted);font-size:12px;margin-top:2px}
+  .kpi.a{border-bottom-color:var(--sky)}.kpi.b{border-bottom-color:var(--cyan)}.kpi.c{border-bottom-color:var(--orange)}.kpi.c .n{color:var(--orangeD)}.kpi.d{border-bottom-color:var(--mint)}.kpi.e{border-bottom-color:var(--red)}.kpi.e .n{color:var(--red)}
+  .grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-bottom:18px}
+  .card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px 18px}
+  .card h3{margin:0 0 14px;font-size:15px;color:var(--cyanD)}
+  .bar{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:13px}
+  .bar .lb{width:120px;color:#3f4b49}.bar .tr{flex:1;background:var(--grey);border-radius:6px;height:14px;overflow:hidden}
+  .bar .fl{height:100%;background:var(--cyan);border-radius:6px}.bar .vv{width:28px;text-align:right;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{text-align:left;color:var(--muted);font-weight:700;padding:9px 8px;border-bottom:1px solid var(--bd);font-size:11.5px}
+  td{padding:9px 8px;border-bottom:1px solid var(--grey)}
+  tr:hover td{background:#fafcfc}
+  .chip{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
+  .c-new{background:#e3f1f6;color:#1c6c85}.c-prog{background:var(--cyanL);color:var(--cyanD)}.c-wait{background:var(--orangeL);color:var(--orangeD)}.c-close{background:var(--greenL);color:var(--green)}.c-noact{background:var(--grey);color:#666}.c-appr{background:#f3e8fb;color:#7a3ca8}
+  .sv{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700}.sv-mi{background:#e7f2f4;color:var(--cyanD)}.sv-ma{background:#fdeadb;color:var(--orangeD)}
+  .pri{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700}.pri-hot{background:var(--redL);color:var(--red)}.pri-warm{background:var(--goldL);color:var(--orangeD)}.pri-cold{background:var(--cyanL);color:var(--cyanD)}
+  .sla{padding:2px 7px;border-radius:6px;font-size:10.5px;font-weight:700}.sla-ok{background:var(--greenL);color:var(--green)}.sla-over{background:var(--redL);color:var(--red)}.sla-due{background:var(--orangeL);color:var(--orangeD)}
+  .btn{border:1px solid var(--bd);background:#fff;border-radius:9px;padding:8px 13px;font-family:inherit;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;color:#33413f}
+  .btn:hover{background:var(--grey)}.btn i{font-size:17px}
+  .btn.p{background:var(--cyan);border-color:var(--cyan);color:#fff}.btn.p:hover{background:var(--cyanD)}
+  .btn.g{background:var(--goldL);border-color:var(--gold);color:#8a6420}
+  .btn.o{background:var(--orangeL);border-color:var(--orange);color:var(--orangeD)}
+  .btn.sm{padding:5px 10px;font-size:12px}
+  .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+  .sel{border:1px solid var(--bd);border-radius:9px;padding:8px 11px;font-family:inherit;font-size:13px;background:#fff;color:#33413f}
+  .det{display:grid;grid-template-columns:1fr 320px;gap:18px}
+  .sec{margin-bottom:16px}
+  .sec h4{margin:0 0 9px;font-size:14px;color:#33413f;display:flex;align-items:center;gap:7px}
+  .fx{position:relative}
+  .anno{position:absolute;right:-9px;top:-9px;background:var(--gold);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .kv{display:flex;gap:8px;font-size:13px;margin-bottom:6px;align-items:center}.kv b{color:var(--muted);font-weight:400;width:96px}
+  .msg{background:var(--grey);border-radius:10px;padding:12px 14px;font-size:13.5px;color:#2a3634}
+  .att{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--bd);border-radius:8px;padding:6px 10px;font-size:12px;margin:6px 6px 0 0;color:#3f4b49}
+  .ai{background:var(--cyanL);border:1px solid #bfe6ee;border-radius:10px;padding:12px 14px}
+  .ai .t{font-size:12px;color:var(--cyanD);font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:8px}
+  .seg{display:inline-flex;border:1px solid var(--bd);border-radius:9px;overflow:hidden}
+  .seg button{border:0;background:#fff;padding:7px 13px;font-family:inherit;font-size:13px;cursor:pointer;color:#556}
+  .seg button.on{background:var(--cyan);color:#fff;font-weight:700}
+  .seg.o button.on{background:var(--orange);color:#5a3a10}
+  .seg.r button.on{background:var(--red);color:#fff}
+  .toggle{display:flex;align-items:center;gap:10px;background:var(--goldL);border:1px solid var(--gold);border-radius:10px;padding:11px 13px}
+  .sw{width:42px;height:24px;background:#2f7a4a;border-radius:20px;position:relative;flex:none}
+  .sw::after{content:'';position:absolute;right:3px;top:3px;width:18px;height:18px;background:#fff;border-radius:50%}
+  .subcase{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--grey);font-size:13px}
+  .subcase i{font-size:19px}.done{color:#2f7a4a}.pend{color:var(--orangeD)}
+  .subcase .id{font-family:monospace;font-size:11.5px;color:var(--muted)}
+  .tl{position:relative}.tl .it{position:relative;padding:0 0 13px 14px;border-left:2px solid var(--bd)}
+  .tl .it::before{content:'';position:absolute;left:-6px;top:2px;width:10px;height:10px;border-radius:50%;background:var(--cyan)}
+  .tl .it b{font-size:13px}.tl .it small{color:var(--muted);font-size:11.5px;display:block}
+  .note{font-size:12px;color:var(--muted);margin-top:6px}
+  .banner{background:var(--orangeL);border:1px solid var(--gold);border-radius:10px;padding:9px 13px;font-size:12.5px;color:#8a6420;display:flex;align-items:center;gap:8px;margin-top:8px}
+  .slarow{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--grey)}
+  .slarow .s1{flex:1;color:#3f4b49}.slarow .s2{color:var(--muted);font-size:11.5px}
+  .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sb">
+    <div class="brand"><div class="logo">B</div><div><b>BeNeat</b><small>Feedback Admin · QP-DCC-06</small></div></div>
+    <nav class="nav" id="nav">
+      <a data-v="dash" class="on"><i class="ti ti-layout-dashboard"></i> แดชบอร์ด</a>
+      <a data-v="list"><i class="ti ti-list-details"></i> รายการเคส</a>
+      <a data-v="detail"><i class="ti ti-file-description"></i> รายละเอียดเคส</a>
+      <a><i class="ti ti-message-2"></i> คลังคำตอบ (FAQ)</a>
+      <a><i class="ti ti-alert-triangle"></i> ข้อร้องเรียน / CAR</a>
+      <a><i class="ti ti-chart-bar"></i> รายงาน</a>
+      <a><i class="ti ti-settings"></i> ตั้งค่า (หมวดหมู่ / สิทธิ์)</a>
+    </nav>
+    <div class="me"><div class="av">DC</div><div><div style="font-size:13px;font-weight:700">DCC — สุชาดา</div><div style="font-size:11px;color:var(--muted)">หน่วยงานกลาง</div></div></div>
+  </aside>
+
+  <main class="main">
+    <div class="top">
+      <h1 id="ttl">แดชบอร์ด</h1>
+      <div class="search"><i class="ti ti-search"></i><input placeholder="ค้นหา FB-2026 / CP-2026 / คุณลูกค้า"></div>
+      <button class="btn"><i class="ti ti-bell"></i></button>
+    </div>
+    <div class="wrap">
+
+      <!-- DASHBOARD -->
+      <section class="view on" id="v-dash">
+        <div class="kpis">
+          <div class="kpi a"><div class="n">7</div><div class="l">รับเรื่องใหม่วันนี้</div></div>
+          <div class="kpi b"><div class="n">12</div><div class="l">กำลังดำเนินการ</div></div>
+          <div class="kpi c"><div class="n">4</div><div class="l">รอคุณลูกค้ายืนยัน</div></div>
+          <div class="kpi e"><div class="n">3</div><div class="l">เกิน SLA</div></div>
+          <div class="kpi d"><div class="n">38</div><div class="l">ปิดแล้ว (เดือนนี้)</div></div>
+          <div class="kpi"><div class="n">2</div><div class="l">เปิด CAR</div></div>
+        </div>
+        <div class="grid2">
+          <div class="card"><h3>Feedback ตามหมวดหมู่ (อ้าง SDDC-05-00)</h3>
+            <div class="bar"><span class="lb">บริการคุณแม่บ้าน</span><span class="tr"><span class="fl" style="width:78%"></span></span><span class="vv">31</span></div>
+            <div class="bar"><span class="lb">แอป & การจอง</span><span class="tr"><span class="fl" style="width:55%;background:var(--sky)"></span></span><span class="vv">22</span></div>
+            <div class="bar"><span class="lb">การชำระเงิน</span><span class="tr"><span class="fl" style="width:34%;background:var(--gold)"></span></span><span class="vv">14</span></div>
+            <div class="bar"><span class="lb">การบริการลูกค้า</span><span class="tr"><span class="fl" style="width:22%;background:var(--orange)"></span></span><span class="vv">9</span></div>
+            <div class="bar"><span class="lb">อื่นๆ</span><span class="tr"><span class="fl" style="width:15%;background:var(--taupe)"></span></span><span class="vv">6</span></div>
+          </div>
+          <div class="card"><h3>ประเภท · ความรุนแรง · Priority</h3>
+            <div class="row" style="margin-bottom:12px">
+              <span class="chip c-noact">No-action 46%</span>
+              <span class="chip c-prog">ข้อร้องเรียน 34%</span>
+              <span class="chip c-close">ข้อเสนอ 20%</span>
+            </div>
+            <div class="bar"><span class="lb">Minor / Major</span><span class="tr"><span class="fl" style="width:70%"></span></span><span class="vv">21/6</span></div>
+            <div class="row" style="margin-top:12px"><span style="font-size:12px;color:var(--muted);width:100px">Priority วันนี้</span>
+              <span class="pri pri-hot">Hot 2</span><span class="pri pri-warm">Warm 5</span><span class="pri pri-cold">Cold 9</span></div>
+          </div>
+        </div>
+        <div class="card"><h3>เคสล่าสุด</h3>
+          <table>
+            <tr><th>Feedback ID</th><th>ข้อร้องเรียน</th><th>คุณลูกค้า</th><th>หมวด</th><th>ระดับ</th><th>Priority</th><th>สถานะ</th><th>SLA</th><th></th></tr>
+            <tr><td>FB-2026-0142</td><td>CP-2026-0031</td><td>คุณพิมพ์</td><td>บริการคุณแม่บ้าน</td><td><span class="sv sv-ma">Major</span></td><td><span class="pri pri-hot">Hot</span></td><td><span class="chip c-prog">กำลังดำเนินการ</span></td><td><span class="sla sla-due">เหลือ 6 ชม</span></td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0141</td><td>—</td><td>คุณต่อ</td><td>แอป & การจอง</td><td>—</td><td><span class="pri pri-cold">Cold</span></td><td><span class="chip c-new">รับเรื่อง</span></td><td><span class="sla sla-ok">ตรงเวลา</span></td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0139</td><td>CP-2026-0030</td><td>ไม่ทราบ (Google Maps)</td><td>การบริการลูกค้า</td><td><span class="sv sv-mi">Minor</span></td><td><span class="pri pri-warm">Warm</span></td><td><span class="chip c-wait">รอลูกค้ายืนยัน</span></td><td><span class="sla sla-over">เกิน 1 วัน</span></td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0138</td><td>—</td><td>คุณเมย์</td><td>การชำระเงิน</td><td>—</td><td>—</td><td><span class="chip c-noact">ปิดโดยไม่ดำเนินการ</span></td><td><span class="sla sla-ok">—</span></td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- LIST -->
+      <section class="view" id="v-list">
+        <div class="filters">
+          <select class="sel"><option>สถานะ: ทั้งหมด</option><option>รับเรื่อง (New)</option><option>กำลังดำเนินการ</option><option>รอลูกค้ายืนยัน</option><option>รออนุมัติผู้บริหาร</option><option>ปิดโดยได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ทราบเคส</option><option>ปิดโดยไม่ดำเนินการ</option></select>
+          <select class="sel"><option>หมวด: ทั้งหมด</option><option>บริการคุณแม่บ้าน</option><option>แอป & การจอง</option><option>การชำระเงิน</option><option>การบริการลูกค้า</option><option>อื่นๆ</option></select>
+          <select class="sel"><option>ระดับ: ทั้งหมด</option><option>Minor</option><option>Major</option></select>
+          <select class="sel"><option>Priority: ทั้งหมด</option><option>Hot</option><option>Warm</option><option>Cold</option></select>
+          <select class="sel"><option>SLA: ทั้งหมด</option><option>เกิน SLA</option><option>ใกล้ครบ</option><option>ตรงเวลา</option></select>
+          <button class="btn p" style="margin-left:auto"><i class="ti ti-download"></i> ส่งออก</button>
+        </div>
+        <div class="card" style="padding:6px 10px">
+          <table>
+            <tr><th>Feedback ID</th><th>ข้อร้องเรียน</th><th>วันที่</th><th>ช่องทาง</th><th>คุณลูกค้า</th><th>หมวด</th><th>ระดับ</th><th>Priority</th><th>สถานะ</th><th>SLA</th><th>Ticket/CAR</th><th></th></tr>
+            <tr><td>FB-2026-0142</td><td>CP-2026-0031</td><td>02/07</td><td>ในแอป</td><td>คุณพิมพ์</td><td>บริการคุณแม่บ้าน</td><td><span class="sv sv-ma">Major</span></td><td><span class="pri pri-hot">Hot</span></td><td><span class="chip c-prog">กำลังดำเนินการ</span></td><td><span class="sla sla-due">เหลือ 6 ชม</span></td><td>TK-118 · CAR-07</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0141</td><td>—</td><td>02/07</td><td>ในแอป</td><td>คุณต่อ</td><td>แอป & การจอง</td><td>—</td><td><span class="pri pri-cold">Cold</span></td><td><span class="chip c-new">รับเรื่อง</span></td><td><span class="sla sla-ok">ตรงเวลา</span></td><td>—</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0139</td><td>CP-2026-0030</td><td>01/07</td><td>Google Maps</td><td>ไม่ทราบเคส</td><td>การบริการลูกค้า</td><td><span class="sv sv-mi">Minor</span></td><td><span class="pri pri-warm">Warm</span></td><td><span class="chip c-wait">รอลูกค้ายืนยัน</span></td><td><span class="sla sla-over">เกิน 1 วัน</span></td><td>TK-117</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0138</td><td>—</td><td>01/07</td><td>ในแอป</td><td>คุณเมย์</td><td>การชำระเงิน</td><td>—</td><td>—</td><td><span class="chip c-noact">ปิดโดยไม่ดำเนินการ</span></td><td>—</td><td>—</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0135</td><td>CP-2026-0028</td><td>30/06</td><td>App Store</td><td>คุณบี</td><td>บริการคุณแม่บ้าน</td><td><span class="sv sv-mi">Minor</span></td><td><span class="pri pri-warm">Warm</span></td><td><span class="chip c-close">ปิดโดยได้รับการยืนยันฯ</span></td><td><span class="sla sla-ok">ตรงเวลา</span></td><td>TK-115</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- DETAIL -->
+      <section class="view" id="v-detail">
+        <div class="row" style="margin-bottom:14px">
+          <button class="btn sm" onclick="go('list')"><i class="ti ti-arrow-left"></i> กลับ</button>
+          <b style="font-size:15px;font-family:monospace">FB-2026-0142</b>
+          <span style="color:var(--muted);font-size:12px">·</span><b style="font-size:14px;font-family:monospace;color:var(--cyanD)">CP-2026-0031</b>
+          <span class="chip c-prog">กำลังดำเนินการ</span>
+          <span class="sv sv-ma">Major</span>
+          <span class="pri pri-hot">Hot</span>
+          <span class="sla sla-due"><i class="ti ti-clock" style="font-size:12px"></i> ขอ CAR เหลือ 6 ชม</span>
+          <span style="margin-left:auto;color:var(--muted);font-size:12px">รับเรื่อง 02/07 09:14 · ในแอป</span>
+        </div>
+        <div class="det">
+          <div>
+            <div class="card sec fx">
+              <span class="anno">4</span>
+              <h4><i class="ti ti-user"></i> ข้อมูลคุณลูกค้า · การตรวจสอบตัวตน</h4>
+              <div class="kv"><b>ชื่อ</b><span>คุณพิมพ์ ใจดี</span></div>
+              <div class="kv"><b>เบอร์</b><span>08x-xxx-1234</span> <span>·</span> <b style="width:auto">Booking</b><span>#BK-99213</span></div>
+              <div class="kv"><b>ยืนยันตัวตน</b><span class="chip c-close">ยืนยันแล้วโดย CM</span> <button class="btn sm" style="margin-left:6px"><i class="ti ti-send"></i> ส่งตรวจ CM/SM</button></div>
+              <div class="note">หากระบุตัวตนไม่ได้ → สถานะ "ปิดโดยไม่ทราบเคส" (ยัง log ไว้ดู trend)</div>
+            </div>
+
+            <div class="card sec">
+              <h4><i class="ti ti-message-report"></i> ข้อความ Feedback + หลักฐาน</h4>
+              <div class="msg">"เจ้าหน้าที่ที่มาให้บริการพูดจาไม่ดีมากค่ะ รู้สึกไม่โอเคเลย อยากให้ตรวจสอบ"</div>
+              <div><span class="att"><i class="ti ti-photo"></i> แชท_แคป.png</span><span class="att"><i class="ti ti-microphone"></i> บันทึกเสียง.m4a</span><span class="att"><i class="ti ti-paperclip"></i> แนบเพิ่ม</span></div>
+            </div>
+
+            <div class="card sec fx">
+              <span class="anno">1</span>
+              <h4><i class="ti ti-category"></i> จำแนกประเภท · ระดับ · Priority (DCC ตัดสิน)</h4>
+              <div class="ai" style="margin-bottom:12px">
+                <div class="t"><i class="ti ti-robot"></i> AI ช่วยจำแนกเบื้องต้น (Pre-classify · ยืนยันโดย DCC)</div>
+                <div class="row"><span class="chip c-prog">หมวด: บริการคุณแม่บ้าน</span><span class="chip c-wait">Sentiment: ลบ</span><span class="sv sv-ma">แนะนำ Major</span><span class="pri pri-hot">แนะนำ Hot</span></div>
+              </div>
+              <div class="row" style="margin-bottom:9px"><span style="width:70px;color:var(--muted)">ประเภท</span>
+                <div class="seg"><button class="on">ข้อร้องเรียน</button><button>ข้อเสนอ</button><button>No-action</button></div></div>
+              <div class="row" style="margin-bottom:9px"><span style="width:70px;color:var(--muted)">ระดับ</span>
+                <div class="seg o"><button>Minor</button><button class="on">Major</button></div>
+                <span style="width:70px;color:var(--muted);margin-left:10px">Priority</span>
+                <div class="seg r"><button class="on">Hot</button><button>Warm</button><button>Cold</button></div></div>
+              <div class="fx" style="margin-top:6px"><span class="anno" style="right:auto;left:-4px;top:-4px">6</span>
+                <div class="banner" style="margin-left:12px;background:var(--cyanL);border-color:var(--cyan);color:var(--cyanD)"><i class="ti ti-repeat"></i> เกิดซ้ำหัวข้อนี้ 4 ครั้ง/เดือน — เกณฑ์: เรื่องเดิม >3 ครั้ง = Minor · แอป/ฟีเจอร์ ≥3 → IT Backlog, ≥5 → ข้อร้องเรียน</div></div>
+            </div>
+
+            <div class="card sec fx">
+              <span class="anno">8</span>
+              <h4><i class="ti ti-arrows-split"></i> การดำเนินการ</h4>
+              <div class="row" style="margin-bottom:10px">
+                <button class="btn p"><i class="ti ti-ticket"></i> สร้าง Ticket ส่ง SM</button>
+                <button class="btn"><i class="ti ti-send"></i> ส่งต้นสังกัด</button>
+                <button class="btn g"><i class="ti ti-message-2"></i> ใช้คำตอบ FAQ</button>
+              </div>
+              <div class="card" style="background:var(--orangeL);border-color:var(--gold);padding:12px 14px">
+                <div class="row"><b style="color:var(--orangeD)"><i class="ti ti-alert-triangle"></i> CAR-2026-07</b>
+                  <span style="margin-left:auto;color:var(--muted);font-size:12px">อ้าง QP-DCC-05</span></div>
+                <div class="row" style="margin-top:8px"><span style="color:var(--muted);font-size:12px">ที่มา:</span>
+                  <div class="seg"><button class="on">ข้อร้องเรียน</button><button>Internal Audit</button></div>
+                  <span class="sla sla-due">ขอ ≤ 24 ชม.</span><span class="sla sla-due">ปิด ≤ 7 วัน</span></div>
+                <div class="note">Major: ออก CAR + ข้อร้องเรียน คู่กัน (คนละกระบวนการ)</div>
+              </div>
+            </div>
+
+            <div class="card sec fx">
+              <span class="anno">7</span>
+              <h4><i class="ti ti-sitemap"></i> เคสย่อยรายแผนก (Sub-case)</h4>
+              <div class="subcase"><i class="ti ti-circle-check done"></i> <div><b>SM</b> — ตรวจสอบพฤติกรรมเจ้าหน้าที่ <span class="id">CP-2026-0031-01</span></div><span style="margin-left:auto"><span class="chip c-close">เสร็จ + แนบหลักฐาน</span></span></div>
+              <div class="subcase"><i class="ti ti-circle-dashed pend"></i> <div><b>HR</b> — พิจารณาตักเตือน <span class="id">CP-2026-0031-02</span></div><span style="margin-left:auto"><span class="chip c-prog">กำลังทำ</span></span></div>
+              <button class="btn sm" style="margin-top:10px"><i class="ti ti-plus"></i> เพิ่มเคสย่อย</button>
+              <div class="banner"><i class="ti ti-info-circle"></i> ปิดเคสหลักได้เมื่อรับหลักฐานครบทุกเคสย่อย</div>
+            </div>
+
+            <div class="card sec fx">
+              <span class="anno">5</span>
+              <h4><i class="ti ti-phone-check"></i> การติดต่อคุณลูกค้า (โดย SM)</h4>
+              <div class="toggle"><div class="sw"></div><div><b>SM ติดต่อ/แจ้งผลคุณลูกค้าแล้ว</b><div class="note" style="margin:0">มีหลักฐาน → DCC ปิดได้โดยไม่ต้องติดต่อซ้ำ · ไม่เกิน 3 ครั้ง/3 วัน</div></div><span class="att" style="margin:0 0 0 auto"><i class="ti ti-file-check"></i> สรุปการโทร.pdf</span></div>
+            </div>
+
+            <div class="card sec fx">
+              <span class="anno">9</span>
+              <h4><i class="ti ti-lock-check"></i> ปิดเคส</h4>
+              <div class="banner" style="background:#f3e8fb;border-color:#c9a3e0;color:#7a3ca8;margin-top:0;margin-bottom:10px"><i class="ti ti-shield-lock"></i> Major ทุกกรณี: ต้องเสนอผู้บริหารลงนามอนุมัติก่อนปิด</div>
+              <div class="row" style="margin-bottom:8px">
+                <button class="btn" style="background:#f3e8fb;border-color:#c9a3e0;color:#7a3ca8"><i class="ti ti-user-check"></i> เสนอผู้บริหารอนุมัติ</button>
+                <span class="chip c-appr">รออนุมัติผู้บริหาร</span>
+              </div>
+              <div class="row"><span style="width:90px;color:var(--muted)">สถานะปิด</span>
+                <select class="sel"><option>ปิดโดยได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ทราบเคส</option><option>ปิดโดยไม่ดำเนินการ</option></select>
+                <button class="btn p"><i class="ti ti-check"></i> ปิดเคส</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card sec fx">
+              <span class="anno">2</span>
+              <h4><i class="ti ti-clock-hour-4"></i> SLA / กำหนดเวลา</h4>
+              <div class="slarow"><div class="s1">รับเรื่อง + ออก ID<div class="s2">ภายในวันทำการเดียวกัน</div></div><span class="sla sla-ok">ตรงเวลา</span></div>
+              <div class="slarow"><div class="s1">จำแนก + Priority<div class="s2">≤ 1 วันทำการ</div></div><span class="sla sla-ok">ตรงเวลา</span></div>
+              <div class="slarow"><div class="s1">ขอ CAR (Major)<div class="s2">≤ 24 ชม.</div></div><span class="sla sla-due">เหลือ 6 ชม</span></div>
+              <div class="slarow"><div class="s1">หลักฐานแก้ไข (Major)<div class="s2">≤ 15 วัน</div></div><span class="sla sla-ok">วันที่ 3/15</span></div>
+              <div class="slarow" style="border:0"><div class="s1">ติดต่อลูกค้า<div class="s2">≤ 3 ครั้ง / 3 วันทำการ</div></div><span class="sla sla-ok">1/3</span></div>
+            </div>
+            <div class="card sec">
+              <h4><i class="ti ti-history"></i> ไทม์ไลน์ / Audit log</h4>
+              <div class="tl">
+                <div class="it"><b>เปิด CAR-2026-07</b><small>ผู้บริหาร · 02/07 14:20</small></div>
+                <div class="it"><b>สร้าง Ticket TK-118 → SM</b><small>DCC · 02/07 10:40</small></div>
+                <div class="it"><b>จำแนก: ร้องเรียน · Major · Hot</b><small>DCC · 02/07 09:30</small></div>
+                <div class="it"><b>ยืนยันตัวตนโดย CM</b><small>CM · 02/07 09:20</small></div>
+                <div class="it"><b>รับเรื่อง (New) — FB-2026-0142</b><small>ระบบ · 02/07 09:14</small></div>
+              </div>
+            </div>
+            <div class="card">
+              <h4><i class="ti ti-link"></i> เอกสารที่ผูก</h4>
+              <div class="kv"><b>Ticket (SM)</b><span>TK-118 · QP-DC-01</span></div>
+              <div class="kv"><b>CAR</b><span>CAR-2026-07 · QP-DCC-05</span></div>
+              <div class="kv"><b>แบบรับ</b><span>FMDC-00-18 · ทะเบียน 00-19</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script>
+  var titles={dash:'แดชบอร์ด',list:'รายการเคส',detail:'รายละเอียดเคส FB-2026-0142'};
+  function go(v){
+    document.querySelectorAll('.view').forEach(function(e){e.classList.remove('on')});
+    document.getElementById('v-'+v).classList.add('on');
+    document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.v===v)});
+    document.getElementById('ttl').textContent=titles[v]||'';
+    window.scrollTo(0,0);
+  }
+  document.querySelectorAll('#nav a[data-v]').forEach(function(a){a.onclick=function(){go(a.dataset.v)}});
+</script>
+</body>
+</html>
