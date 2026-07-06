@@ -44,7 +44,7 @@
   td{padding:9px 8px;border-bottom:1px solid var(--grey)}
   tr:hover td{background:#fafcfc}
   .chip{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
-  .c-new{background:#e3f1f6;color:#1c6c85}.c-prog{background:var(--cyanL);color:var(--cyanD)}.c-wait{background:var(--orangeL);color:var(--orangeD)}.c-close{background:var(--greenL);color:var(--green)}.c-noact{background:var(--grey);color:#666}.c-appr{background:#f3e8fb;color:#7a3ca8}
+  .c-new{background:#e3f1f6;color:#1c6c85}.c-prog{background:var(--cyanL);color:var(--cyanD)}.c-wait{background:var(--orangeL);color:var(--orangeD)}.c-close{background:var(--greenL);color:var(--green)}.c-noact{background:var(--grey);color:#666}.c-appr{background:#f3e8fb;color:#7a3ca8}.c-done{background:#dff0e8;color:#2f7a4a}
   .sv{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700}.sv-mi{background:#e7f2f4;color:var(--cyanD)}.sv-ma{background:#fdeadb;color:var(--orangeD)}
   .pri{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700}.pri-hot{background:var(--redL);color:var(--red)}.pri-warm{background:var(--goldL);color:var(--orangeD)}.pri-cold{background:var(--cyanL);color:var(--cyanD)}
   .sla{padding:2px 7px;border-radius:6px;font-size:10.5px;font-weight:700}.sla-ok{background:var(--greenL);color:var(--green)}.sla-over{background:var(--redL);color:var(--red)}.sla-due{background:var(--orangeL);color:var(--orangeD)}
@@ -154,7 +154,7 @@
       <!-- LIST -->
       <section class="view" id="v-list">
         <div class="filters">
-          <select class="sel"><option>สถานะ: ทั้งหมด</option><option>รับเรื่อง (New)</option><option>กำลังดำเนินการ</option><option>รอลูกค้ายืนยัน</option><option>รออนุมัติผู้บริหาร</option><option>ปิดโดยได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ทราบเคส</option><option>ปิดโดยไม่ดำเนินการ</option></select>
+          <select class="sel"><option>สถานะ: ทั้งหมด</option><option>รับเรื่อง (New)</option><option>กำลังดำเนินการ</option><option>ดำเนินการแล้ว (ยังไม่ติดต่อ)</option><option>รอลูกค้ายืนยัน</option><option>รออนุมัติผู้บริหาร</option><option>ปิดโดยได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ได้รับการยืนยันจากลูกค้า</option><option>ปิดข้อเสนอแนะ</option><option>ปิดโดยไม่ทราบเคส</option><option>ปิดโดยไม่ดำเนินการ</option></select>
           <select class="sel"><option>หมวด: ทั้งหมด</option><option>บริการคุณแม่บ้าน</option><option>แอป & การจอง</option><option>การชำระเงิน</option><option>การบริการลูกค้า</option><option>อื่นๆ</option></select>
           <select class="sel"><option>ระดับ: ทั้งหมด</option><option>Minor</option><option>Major</option></select>
           <select class="sel"><option>Priority: ทั้งหมด</option><option>Hot</option><option>Warm</option><option>Cold</option></select>
@@ -165,6 +165,8 @@
           <table>
             <tr><th>Feedback ID</th><th>ข้อร้องเรียน</th><th>วันที่</th><th>ช่องทาง</th><th>คุณลูกค้า</th><th>หมวด</th><th>ระดับ</th><th>Priority</th><th>สถานะ</th><th>SLA</th><th>Ticket/CAR</th><th></th></tr>
             <tr><td>FB-2026-0142</td><td>CP-2026-0031</td><td>02/07</td><td>ในแอป</td><td>คุณพิมพ์</td><td>บริการคุณแม่บ้าน</td><td><span class="sv sv-ma">Major</span></td><td><span class="pri pri-hot">Hot</span></td><td><span class="chip c-prog">กำลังดำเนินการ</span></td><td><span class="sla sla-due">เหลือ 6 ชม</span></td><td>TK-118 · CAR-07</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0140</td><td>CP-2026-0029</td><td>01/07</td><td>ในแอป</td><td>คุณกิ่ง</td><td>บริการคุณแม่บ้าน</td><td><span class="sv sv-mi">Minor</span></td><td><span class="pri pri-warm">Warm</span></td><td><span class="chip c-done">ดำเนินการแล้ว (ยังไม่ติดต่อ)</span></td><td><span class="sla sla-ok">2/3</span></td><td>TK-116</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
+            <tr><td>FB-2026-0137</td><td>—</td><td>30/06</td><td>ในแอป</td><td>คุณโบว์</td><td>แอป & การจอง</td><td>—</td><td><span class="pri pri-cold">Cold</span></td><td><span class="chip c-close">ปิดข้อเสนอแนะ</span></td><td><span class="sla sla-ok">—</span></td><td>—</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
             <tr><td>FB-2026-0141</td><td>—</td><td>02/07</td><td>ในแอป</td><td>คุณต่อ</td><td>แอป & การจอง</td><td>—</td><td><span class="pri pri-cold">Cold</span></td><td><span class="chip c-new">รับเรื่อง</span></td><td><span class="sla sla-ok">ตรงเวลา</span></td><td>—</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
             <tr><td>FB-2026-0139</td><td>CP-2026-0030</td><td>01/07</td><td>Google Maps</td><td>ไม่ทราบเคส</td><td>การบริการลูกค้า</td><td><span class="sv sv-mi">Minor</span></td><td><span class="pri pri-warm">Warm</span></td><td><span class="chip c-wait">รอลูกค้ายืนยัน</span></td><td><span class="sla sla-over">เกิน 1 วัน</span></td><td>TK-117</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
             <tr><td>FB-2026-0138</td><td>—</td><td>01/07</td><td>ในแอป</td><td>คุณเมย์</td><td>การชำระเงิน</td><td>—</td><td>—</td><td><span class="chip c-noact">ปิดโดยไม่ดำเนินการ</span></td><td>—</td><td>—</td><td><button class="btn sm" onclick="go('detail')">เปิด</button></td></tr>
@@ -250,6 +252,7 @@
               <span class="anno">5</span>
               <h4><i class="ti ti-phone-check"></i> การติดต่อคุณลูกค้า (โดย SM)</h4>
               <div class="toggle"><div class="sw"></div><div><b>SM ติดต่อ/แจ้งผลคุณลูกค้าแล้ว</b><div class="note" style="margin:0">มีหลักฐาน → DCC ปิดได้โดยไม่ต้องติดต่อซ้ำ · ไม่เกิน 3 ครั้ง/3 วัน</div></div><span class="att" style="margin:0 0 0 auto"><i class="ti ti-file-check"></i> สรุปการโทร.pdf</span></div>
+              <div class="note"><span class="chip c-done">ดำเนินการแล้ว</span> (แก้ไขเสร็จ ยังไม่ติดต่อ) → <span class="chip c-wait">รอลูกค้ายืนยัน</span> (กำลังติดต่อ) → ปิด — แยกสถานะเพื่อนับเคสที่ยังไม่ได้ติดต่อลูกค้าได้</div>
             </div>
 
             <div class="card sec fx">
@@ -261,7 +264,7 @@
                 <span class="chip c-appr">รออนุมัติผู้บริหาร</span>
               </div>
               <div class="row"><span style="width:90px;color:var(--muted)">สถานะปิด</span>
-                <select class="sel"><option>ปิดโดยได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ทราบเคส</option><option>ปิดโดยไม่ดำเนินการ</option></select>
+                <select class="sel"><option>ปิดโดยได้รับการยืนยันจากลูกค้า</option><option>ปิดโดยไม่ได้รับการยืนยันจากลูกค้า</option><option>ปิดข้อเสนอแนะ</option><option>ปิดโดยไม่ทราบเคส</option><option>ปิดโดยไม่ดำเนินการ</option></select>
                 <button class="btn p"><i class="ti ti-check"></i> ปิดเคส</button>
               </div>
             </div>
